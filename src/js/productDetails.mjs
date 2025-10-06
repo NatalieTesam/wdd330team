@@ -10,11 +10,6 @@ export default async function productDetails(productId) {
   document.getElementById("addToCart").addEventListener("click", addToCart);
 }
 
-export async function findProductById(id) {
-  const products = await getData();
-  return products.find((item) => item.Id === id);
-}
-
 // add item to cart
 function addToCart() {
   setLocalStorage("so-cart", product);
