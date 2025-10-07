@@ -31,8 +31,9 @@ async function showAllAlerts() {
 
     container.appendChild(alertDiv);
   });
-  const main = document.querySelector("main");
-  main.prepend(alertSection);
+
+  // const main = document.querySelector("main");
+  // main.prepend(alertSection);
 }
 
 document.addEventListener("DOMContentLoaded", showAllAlerts);
