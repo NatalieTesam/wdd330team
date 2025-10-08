@@ -1,5 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 let product = {};
 
@@ -12,7 +12,16 @@ export default async function productDetails(productId) {
 
 // add item to cart
 function addToCart() {
-  setLocalStorage("so-cart", product);
+  // Get whatever is already in local storage
+  let cartItems = getLocalStorage("so-cart");
+  // If it's not an array (e.g., null or a single object), convert it
+  if (!Array.isArray(cartItems)) {
+    cartItems = cartItems && Object.keys(cartItems).length ? [cartItems] : [];
+  }
+  // Add the new product
+  cartItems.push(product);
+  // Save the updated array
+  setLocalStorage("so-cart", cartItems);
 }
 
 // display the product details in each product page
