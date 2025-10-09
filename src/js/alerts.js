@@ -9,7 +9,7 @@ function convertToJson(res) {
 function getAlert(category = "alert") {
   return fetch(`./json/${category}.json`)
     .then(convertToJson)
-    .catch((error) => console.error("Error fetching alert data"));
+    .catch((error) => console.error("Error fetching alert data", error));
 }
 
 async function showAllAlerts() {
@@ -20,9 +20,9 @@ async function showAllAlerts() {
   // show each alert by its index
   alerts.forEach((alert) => {
     const alertDiv = document.createElement("div");
-    alertDiv.innerHTML =
-      '<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>' +
-      alert.message;
+    alertDiv.innerHTML = `
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  ${alert.message} `;
     alertDiv.style.backgroundColor = alert.background;
     alertDiv.style.color = alert.color;
     alertDiv.style.padding = "15px";
