@@ -1,13 +1,22 @@
 import { findProductById } from "./productData.mjs";
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderWithTemplate } from "./utils.mjs";
 
 let product = {};
 
 // get product details using 'productId'
 export default async function productDetails(productId) {
   product = await findProductById(productId);
-  renderProductDetails();
-  document.getElementById("addToCart").addEventListener("click", addToCart);
+  if (product != undefined) {
+    // renderProductDetails();
+    renderWithTemplate(productDetailsTemplate, document.querySelector("main"), product)
+    document.getElementById("addToCart").addEventListener("click", addToCart);
+  }
+  else {
+    document.querySelector("main").innerHTML = `
+      <section class="error-message">
+        <h2>Product not found.</h2>
+      </section>`
+  }
 }
 
 // add item to cart
@@ -24,18 +33,19 @@ function addToCart() {
   setLocalStorage("so-cart", cartItems);
 }
 
-// display the product details in each product page
-function renderProductDetails() {
-  document.querySelector("#productName").innerText = product.Brand.Name;
-  document.querySelector("#productNameWithoutBrand").innerText =
-    product.NameWithoutBrand;
-  document.querySelector("#productImage").src = product.Image;
-  document.querySelector("#productImage").alt = product.Name;
-  document.querySelector("#productFinalPrice").innerText = product.FinalPrice;
-  document.querySelector("#productColorName").innerText =
-    product.Colors[0].ColorName;
-  document.querySelector("#productDescriptionHtmlSimple").innerHTML =
-    product.DescriptionHtmlSimple;
-  document.querySelector("#addToCart").dataset.id = product.Id;
+function productDetailsTemplate(product) {
+  return  `
+    <section class="product-detail" id="product-detail">
+      <h3 id="productName">${product.Brand.Name}</h3>
+      <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
+      <img id="productImage" class="divider" src="${product.Image}" alt="${product.Name}" />
+      <p class="product-card__price" id="productFinalPrice">${product.FinalPrice}</p>
+      <p class="product__color" id="productColorName">${product.Colors[0].ColorName}</p>
+      <p class="product__description" id="productDescriptionHtmlSimple">${product.DescriptionHtmlSimple}</p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+      </div>
+    </section>
+  `
 }
 
