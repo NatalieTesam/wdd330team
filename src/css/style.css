@@ -172,6 +172,27 @@ button {
 }
 /* End product list card */
 
+/**************************
+*      PRODUCT PAGES      *
+**************************/
+.product-prices p,
+.card__price {
+  display: inline-block; /* makes them sit on the same line */
+  margin-right: 10px; /* spacing between prices */
+}
+
+.product-discount__price,
+.suggested-price {
+  text-decoration: line-through; /* for original/suggested price */
+  color: gray;
+}
+
+.product-card__price,
+.final-price {
+  font-weight: bold;
+  color: green; /* final price */
+}
+
 .product-detail {
   padding: 1em;
   max-width: 500px;
