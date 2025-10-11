@@ -21,3 +21,21 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+// return product parameters 
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get(param); // return product
+}
+
+export function renderWithTemplate(templateFn, parent, data) {
+  parent.innerHTML = templateFn(data);
+}
+
+// Helper to render a list of template items
+export function renderList(templateFn, parent, list) {
+  const htmlList = list.map(templateFn).join("");
+  parent.innerHTML = htmlList;
+}
+
