@@ -39,7 +39,10 @@ function productDetailsTemplate(product) {
       <h3 id="productName">${product.Brand.Name}</h3>
       <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
       <img id="productImage" class="divider" src="${product.Image}" alt="${product.Name}" />
-      <p class="product-card__price" id="productFinalPrice">${product.FinalPrice}</p>
+      <p class="card__price">
+        <span class="final-price">$${product.FinalPrice.toFixed(2)}</span>
+        <span class="suggested-price">$${product.SuggestedRetailPrice.toFixed(2)}</span>
+      </p>
       <p class="product__color" id="productColorName">${product.Colors[0].ColorName}</p>
       <p class="product__description" id="productDescriptionHtmlSimple">${product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
@@ -48,4 +51,3 @@ function productDetailsTemplate(product) {
     </section>
   `
 }
-
