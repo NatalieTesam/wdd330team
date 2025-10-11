@@ -33,19 +33,21 @@ function addToCart() {
   setLocalStorage("so-cart", cartItems);
 }
 
-// display the product details in each product page
-function renderProductDetails() {
-  document.querySelector("#productName").innerText = product.Brand.Name;
-  document.querySelector("#productNameWithoutBrand").innerText =
-    product.NameWithoutBrand;
-  document.querySelector("#productImage").src = product.Image;
-  document.querySelector("#productImage").alt = product.Name;
-  document.querySelector("#productSuggestedPrice").innerText = `$${product.SuggestedRetailPrice.toFixed(2)}`;
-  document.querySelector("#productFinalPrice").innerText = `$${product.FinalPrice.toFixed(2)}`;
-  document.querySelector("#productColorName").innerText =
-    product.Colors[0].ColorName;
-  document.querySelector("#productDescriptionHtmlSimple").innerHTML =
-    product.DescriptionHtmlSimple;
-  document.querySelector("#addToCart").dataset.id = product.Id;
+function productDetailsTemplate(product) {
+  return  `
+    <section class="product-detail" id="product-detail">
+      <h3 id="productName">${product.Brand.Name}</h3>
+      <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
+      <img id="productImage" class="divider" src="${product.Image}" alt="${product.Name}" />
+      <p class="card__price">
+        <span class="final-price">$${product.FinalPrice.toFixed(2)}</span>
+        <span class="suggested-price">$${product.SuggestedRetailPrice.toFixed(2)}</span>
+      </p>
+      <p class="product__color" id="productColorName">${product.Colors[0].ColorName}</p>
+      <p class="product__description" id="productDescriptionHtmlSimple">${product.DescriptionHtmlSimple}</p>
+      <div class="product-detail__add">
+        <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+      </div>
+    </section>
+  `
 }
-
