@@ -127,6 +127,20 @@ button {
   fill: gray;
 }
 
+@keyframes cart-bounce {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.2); }
+  40% { transform: scale(0.9); }
+  60% { transform: scale(1.1); }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.cart-animate {
+  animation: cart-bounce 1s ease;
+}
+
+
 /* home */
 .mission {
   padding: 0 0.5em;

@@ -23,14 +23,19 @@ export default async function productDetails(productId) {
 function addToCart() {
   // Get whatever is already in local storage
   let cartItems = getLocalStorage("so-cart");
-  // If it's not an array (e.g., null or a single object), convert it
   if (!Array.isArray(cartItems)) {
     cartItems = cartItems && Object.keys(cartItems).length ? [cartItems] : [];
   }
-  // Add the new product
   cartItems.push(product);
-  // Save the updated array
   setLocalStorage("so-cart", cartItems);
+
+  // 🪄 Animate the cart icon
+  const cartIcon = document.getElementById("cartIcon");
+  if (cartIcon) {
+    cartIcon.classList.remove("cart-animate"); // reset if it’s mid-animation
+    void cartIcon.offsetWidth; // force reflow to restart animation
+    cartIcon.classList.add("cart-animate");
+  }
 }
 
 function productDetailsTemplate(product) {
