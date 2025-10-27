@@ -179,20 +179,21 @@ button {
 *     CATEGORY ICONS      *
 **************************/
 .product-categories {
-  list-style-type: none;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   color: var(--dark-grey);
   padding-left: 0;
+    list-style-type: none;
 }
 
-.product-categories > li {
+.product-categories li {
   width: 150px;
   /* border: 1px solid var(--light-grey); */
   padding: 0.5em;
   margin: 1em;
+  list-style-type: none;
 }
 
 .product-categories h2 {
@@ -201,6 +202,7 @@ button {
 }
 .product-categories a {
   text-decoration: none;
+
 }
 .product-categories a:link,
 .product-categories a:visited {
