@@ -43,7 +43,7 @@ function productDetailsTemplate(product) {
     <section class="product-detail" id="product-detail">
       <h3 id="productName">${product.Brand.Name}</h3>
       <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
-      <img id="productImage" class="divider" src="${product.Image}" alt="${product.Name}" />
+      <img id="productImage" class="divider" src="${product.Images.PrimaryLarge}" alt="${product.Name}" />
       <p class="card__price">
         <span class="final-price">$${product.FinalPrice.toFixed(2)}</span>
         <span class="suggested-price">$${product.SuggestedRetailPrice.toFixed(2)}</span>
