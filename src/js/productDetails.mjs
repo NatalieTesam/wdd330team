@@ -1,5 +1,9 @@
 import { findProductById } from "./productData.mjs";
-import { getLocalStorage, setLocalStorage, renderWithTemplate } from "./utils.mjs";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  renderWithTemplate,
+} from "./utils.mjs";
 
 let product = {};
 
@@ -8,14 +12,17 @@ export default async function productDetails(productId) {
   product = await findProductById(productId);
   if (product != undefined) {
     // renderProductDetails();
-    renderWithTemplate(productDetailsTemplate, document.querySelector("main"), product)
+    renderWithTemplate(
+      productDetailsTemplate,
+      document.querySelector("main"),
+      product,
+    );
     document.getElementById("addToCart").addEventListener("click", addToCart);
-  }
-  else {
+  } else {
     document.querySelector("main").innerHTML = `
       <section class="error-message">
         <h2>Product not found.</h2>
-      </section>`
+      </section>`;
   }
 }
 
@@ -39,14 +46,26 @@ function addToCart() {
 }
 
 function productDetailsTemplate(product) {
-  return  `
+  const discountAmount = product.SuggestedRetailPrice - product.FinalPrice;
+  const discountPercent = (discountAmount / product.SuggestedRetailPrice) * 100;
+
+  return `
     <section class="product-detail" id="product-detail">
       <h3 id="productName">${product.Brand.Name}</h3>
       <h2 class="divider" id="productNameWithoutBrand">${product.NameWithoutBrand}</h2>
-      <img id="productImage" class="divider" src="${product.Images.PrimaryLarge}" alt="${product.Name}" />
+      <img id="productImage" class="divider" src="${product.Image}" alt="${product.Name}" />
       <p class="card__price">
         <span class="final-price">$${product.FinalPrice.toFixed(2)}</span>
         <span class="suggested-price">$${product.SuggestedRetailPrice.toFixed(2)}</span>
+       ${
+         discountAmount > 0
+           ? `
+  <p class="discount-indicator">
+    You save $${discountAmount.toFixed(2)} (${discountPercent.toFixed(0)}% off)
+  </p>`
+           : ""
+       }
+
       </p>
       <p class="product__color" id="productColorName">${product.Colors[0].ColorName}</p>
       <p class="product__description" id="productDescriptionHtmlSimple">${product.DescriptionHtmlSimple}</p>
@@ -54,5 +73,5 @@ function productDetailsTemplate(product) {
         <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
       </div>
     </section>
-  `
+  `;
 }
