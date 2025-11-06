@@ -29,9 +29,9 @@ function addToCart() {
   
   const matching = cartItems.find(item => item.Id === product.Id);
   if (matching) {
-    matching.quantity = (matching.quantity || 1) + 1;
+    matching.Quantity = (matching.Quantity || 1) + 1;
   } else {
-    cartItems.push({ ...product, quantity: 1 });
+    cartItems.push({ ...product, Quantity: 1 });
   }
 
   setLocalStorage("so-cart", cartItems);
