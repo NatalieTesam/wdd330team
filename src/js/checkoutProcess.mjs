@@ -41,10 +41,10 @@ const checkoutProcess = {
   },
   calculateItemSummary: function () {
     const summaryElement = document.querySelector(
-      this.outputSelector + " #cartTotal",
+      this.outputSelector + " #subtotal",
     );
     const itemNumElement = document.querySelector(
-      this.outputSelector + " #num-items",
+      this.outputSelector + " #numberOfItems",
     );
     itemNumElement.innerText = this.list.length;
     // calculate the total of all the items in the cart
