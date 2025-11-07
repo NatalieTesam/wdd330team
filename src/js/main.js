@@ -1,5 +1,8 @@
 import { loadHeaderFooter } from "./utils.mjs";
+import { initModalHandlers } from "./register.mjs";
 
-(async () => {
-  await loadHeaderFooter();
-})();
+//(async () => {
+//  await loadHeaderFooter();
+//})();
+loadHeaderFooter();
+initModalHandlers();
