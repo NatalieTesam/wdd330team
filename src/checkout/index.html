@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Sleep Outside | Checkout</title>
-
-    <link rel="stylesheet" href="css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
@@ -60,6 +60,61 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+
+      <form id="checkoutForm">
+        <fieldset>
+          <legend>Shipping</legend>
+          <label for="fname">First Name</label><br />
+          <input id="fname" type="text" name="fname" required /><br />
+
+          <label for="lname">Last Name</label> <br />
+          <input id="lname" type="text" name="lname" required /><br />
+
+          <label for="street">Street</label> <br />
+          <input id="street" type="text" name="street" required /><br />
+
+          <label for="city">City</label> <br />
+          <input id="city" type="text" name="city" required /><br />
+
+          <label for="state">state</label> <br />
+          <input id="state" type="text" name="state" required /><br />
+
+          <label for="zip">Zip</label> <br />
+          <input id="zip" type="number" name="zip" required /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Payment</legend>
+          <label for="cardNumber">Card Number</label> <br />
+          <input
+            id="cardNumber"
+            type="number"
+            name="cardNumber"
+            minlength="15"
+            maxlength="16"
+            required
+          /><br />
+
+          <label for="expiration">expiration</label><br />
+          <input id="expiration" name="expiration" required /><br />
+
+          <label for="code">Security code</label><br />
+          <input id="code" type="number" name="code" required /><br />
+        </fieldset>
+
+        <fieldset>
+          <legend>Order Summary</legend>
+          <div class="orderSummary">
+            <p>Items: <span id="numberOfItems"></span></p>
+            <p>Subtotal: <span id="subtotal"></span></p>
+            <p>Shipping $<span id="shipping"></span></p>
+            <p>Tax $<span id="tax"></span></p>
+            <p>Total $<span id="orderTotal"></span></p>
+          </div>
+        </fieldset>
+
+        <button class="submit" type="submit">Submit</button>
+      </form>
     </main>
 
     <footer>&copy;NOT a real business</footer>
