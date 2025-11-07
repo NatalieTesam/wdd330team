@@ -24,9 +24,16 @@ function addToCart() {
   // Get whatever is already in local storage
   let cartItems = getLocalStorage("so-cart");
   if (!Array.isArray(cartItems)) {
-    cartItems = cartItems && Object.keys(cartItems).length ? [cartItems] : [];
+    cartItems = [cartItems];
   }
-  cartItems.push(product);
+  
+  const matching = cartItems.find(item => item.Id === product.Id);
+  if (matching) {
+    matching.Quantity = (matching.Quantity || 1) + 1;
+  } else {
+    cartItems.push({ ...product, Quantity: 1 });
+  }
+
   setLocalStorage("so-cart", cartItems);
 
   // 🪄 Animate the cart icon

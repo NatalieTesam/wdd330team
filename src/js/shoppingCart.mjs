@@ -15,7 +15,7 @@ export function renderCartContents() {
     cartFooter.classList.remove("hide");
 
     cartItems.forEach((item) => {
-      total += item.FinalPrice;
+      total += (item.FinalPrice * item.Quantity);
     });
   }
   cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
@@ -41,14 +41,22 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
+    <p class="cart-card__quantity">qty: ${item.Quantity}</p>
+    <p class="cart-card__price">$${item.FinalPrice * item.Quantity}</p>
   </li>`;
 }
 
 function removeCartItem(itemId) {
   let cartItems = getLocalStorage("so-cart");
-  cartItems = cartItems.filter((item) => item.Id != itemId);
+
+  const matching = cartItems.find(item => item.Id === itemId);
+  if (matching) {
+    if (matching.Quantity == 1) {
+      cartItems = cartItems.filter((item) => item.Id != itemId);
+    }
+    matching.Quantity -= 1;
+  } 
+  
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
 }
