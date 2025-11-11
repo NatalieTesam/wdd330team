@@ -77,12 +77,33 @@ function loadTemplate(path) {
     };
 } 
 
-export function loadHeaderFooter() {
+export async function loadHeaderFooter() {
   const headerTemplateFn = loadTemplate("/partials/header.html");
   const footerTemplateFn = loadTemplate("/partials/footer.html");
   const header = qs("header");
   const footer = qs("footer");
   
-  renderHTMLWithTemplate(headerTemplateFn, header);
-  renderHTMLWithTemplate(footerTemplateFn, footer);
+  await renderHTMLWithTemplate(headerTemplateFn, header);
+  await renderHTMLWithTemplate(footerTemplateFn, footer);
+  
+  // Update cart badge after header is loaded
+  updateCartBadge();
+}
+
+// Update the cart badge with the number of items in the cart
+export function updateCartBadge() {
+  const cartItems = getLocalStorage("so-cart");
+  const badge = qs("#cartBadge");
+  
+  if (badge) {
+    const count = Array.isArray(cartItems) ? cartItems.length : 0;
+    badge.textContent = count;
+    
+    // Hide badge if count is 0
+    if (count === 0) {
+      badge.classList.add("hidden");
+    } else {
+      badge.classList.remove("hidden");
+    }
+  }
 }

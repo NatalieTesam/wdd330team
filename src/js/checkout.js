@@ -1,9 +1,11 @@
 import { loadHeaderFooter } from "./utils.mjs";
 import checkoutProcess from "./checkoutProcess.mjs";
 
-loadHeaderFooter();
+(async () => {
+  await loadHeaderFooter();
+  checkoutProcess.init("so-cart", ".orderSummary");
+})();
 
-checkoutProcess.init("so-cart", ".orderSummary");
 
 document
   .querySelector("#zip")

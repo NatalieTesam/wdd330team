@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartBadge } from "./utils.mjs";
 
 const cartTotal = document.querySelector(".cart-total");
 const cartFooter = document.querySelector(".cart-footer");
@@ -58,5 +58,6 @@ function removeCartItem(itemId) {
   } 
   
   setLocalStorage("so-cart", cartItems);
+  updateCartBadge();
   renderCartContents();
 }
