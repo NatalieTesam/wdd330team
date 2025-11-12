@@ -96,10 +96,12 @@ export function updateCartBadge() {
   const badge = qs("#cartBadge");
   
   if (badge) {
-    const count = Array.isArray(cartItems) ? cartItems.length : 0;
+    // Count total quantity across all cart entries
+    const count = Array.isArray(cartItems)
+      ? cartItems.reduce((sum, item) => sum + (Number(item.Quantity) || 0), 0)
+      : 0;
     badge.textContent = count;
     
-    // Hide badge if count is 0
     if (count === 0) {
       badge.classList.add("hidden");
     } else {
