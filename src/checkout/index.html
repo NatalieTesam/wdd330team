@@ -76,7 +76,7 @@
           <label for="city">City</label> <br />
           <input id="city" type="text" name="city" required /><br />
 
-          <label for="state">state</label> <br />
+          <label for="state">State</label> <br />
           <input id="state" type="text" name="state" required /><br />
 
           <label for="zip">Zip</label> <br />
@@ -90,26 +90,32 @@
             id="cardNumber"
             type="number"
             name="cardNumber"
-            minlength="15"
+            minlength="16"
             maxlength="16"
             required
           /><br />
 
-          <label for="expiration">expiration</label><br />
-          <input id="expiration" name="expiration" required /><br />
+          <label for="expiration">Expiration</label><br />
+          <input id="expiration" name="expiration" /><br />
 
           <label for="code">Security code</label><br />
-          <input id="code" type="number" name="code" required /><br />
+          <input
+            id="code"
+            type="number"
+            name="code"
+            minlength="3"
+            maxlength="3"
+          /><br />
         </fieldset>
 
         <fieldset>
           <legend>Order Summary</legend>
           <div class="orderSummary">
-            <p>Items: <span id="numberOfItems"></span></p>
-            <p>Subtotal: <span id="subtotal"></span></p>
-            <p>Shipping $<span id="shipping"></span></p>
-            <p>Tax $<span id="tax"></span></p>
-            <p>Total $<span id="orderTotal"></span></p>
+            <p><strong>Items </strong><span id="numberOfItems"></span></p>
+            <p><strong>Subtotal </strong><span id="subtotal"></span></p>
+            <p><strong>Shipping </strong><span id="shipping"></span></p>
+            <p><strong>Tax </strong><span id="tax"></span></p>
+            <p><strong>Total </strong><span id="orderTotal"></span></p>
           </div>
         </fieldset>
 
