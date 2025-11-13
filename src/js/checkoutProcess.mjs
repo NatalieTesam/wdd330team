@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
 function formDataToJSON(formElement) {
@@ -75,7 +75,7 @@ const checkoutProcess = {
   checkout: async function (form) {
     const json = formDataToJSON(form);
     // add totals, and item details
-    json.orderDate = new Date();
+    json.orderDate = new Date().toISOString();
     json.orderTotal = this.orderTotal;
     json.tax = this.tax;
     json.shipping = this.shipping;
@@ -84,10 +84,18 @@ const checkoutProcess = {
     try {
       const res = await checkout(json);
       console.log(res);
+      window.location.href = "success.html";
+      setLocalStorage("so-cart", []);
     } catch (err) {
       console.log(err);
+      removeAllAlerts();
+      const errorMessage = await err.message;
+      const errorMessageJSON = JSON.parse(errorMessage);
+      console.log(errorMessage);
+      for (let message in errorMessageJSON)
+        alertMessage(errorMessageJSON[message]);
+      }
     }
-  },
-};
+  };
 
 export default checkoutProcess;

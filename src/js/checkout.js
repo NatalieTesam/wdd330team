@@ -13,10 +13,12 @@ document
   );
 
 // this is how it would look if we listen for the submit on the form
-document.forms["checkoutForm"].addEventListener("submit", (e) => {
+document.querySelector("#checkoutForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  // e.target would contain our form in this case
-  checkoutProcess.checkout(e.target);
+  var myForm = document.forms[0];
+  var chk_status = myForm.checkValidity();
+  myForm.reportValidity();
+  if (chk_status) checkoutProcess.checkout(e.target);
 });
 
 // listening for click on the button
