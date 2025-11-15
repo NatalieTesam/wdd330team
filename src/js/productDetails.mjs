@@ -1,5 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { getLocalStorage, setLocalStorage, renderWithTemplate } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderWithTemplate, updateCartBadge } from "./utils.mjs";
 
 let product = {};
 
@@ -36,10 +36,13 @@ function addToCart() {
 
   setLocalStorage("so-cart", cartItems);
 
+  // Update the cart badge
+  updateCartBadge();
+
   // 🪄 Animate the cart icon
   const cartIcon = document.getElementById("cartIcon");
   if (cartIcon) {
-    cartIcon.classList.remove("cart-animate"); // reset if it’s mid-animation
+    cartIcon.classList.remove("cart-animate"); // reset if it's mid-animation
     void cartIcon.offsetWidth; // force reflow to restart animation
     cartIcon.classList.add("cart-animate");
   }
