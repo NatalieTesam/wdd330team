@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <dialog class="register-modal">
+      <form class="modal-content" method="dialog">
+        <h3>New Here?</h3>
+        <p>Register today for a chance to win!</p>
+        <div>
+          <label for="fname">First Name: </label>
+          <input id="fname" type="text" required /><br />
+        </div>
+        <div>
+          <label for="lname">Last Name: </label>
+          <input id="lname" type="text" required /><br />
+        </div>
+        <div>
+          <label for="email">Email: </label>
+          <input id="email" type="email" required /><br />
+        </div>
+        <div>
+          <label for="password">Password: </label>
+          <input id="password" type="password" required /><br />
+        </div>
+        <button id="confirm-btn" type="submit" value="default">Register</button>
+        <button class="close" value="cancel" formmethod="dialog">
+          I don't like prizes!
+        </button>
+      </form>
+    </dialog>
+    <dialog class="confirmationModal">
+      <div>
+        <p>🎉 Congratulations! Registration successful! 🎉</p>
+      </div>
+    </dialog>
     <div class="alert">
       <div id="alert"></div>
     </div>
